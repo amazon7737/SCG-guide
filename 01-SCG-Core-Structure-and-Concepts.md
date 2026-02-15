@@ -4,8 +4,6 @@
 - Gateway는 문지기처럼 들어오는 모든 요청을 검사하고, 적절한 목적지로 안내하며, 필요한 경우 요청의 형태를 가공한다.
 - Spring Cloud Gateway는 이런 역할을 수행하기 위해서 Route(경로), Predicate(조건), Filter(필터)라는 세 가지 핵심 요소를 동작시킨다.
 
-<img src="./imgs/scg-how-it-works.png" width="500">
-
 ### Route
 
 <img src="./imgs/route-find-request.png" width="500">
@@ -68,6 +66,8 @@ Filter들은 체인(Chain) 형태로 연결되어 있어, 순차적으로 하나
 ### 요청의 여정
 
 결국 클라이언트의 요청은 다음과 같은 순서로 Gateway를 통과하게 된다.
+
+<img src="./imgs/scg-how-it-works.png" width="500">
 
 1. Handler Mapping : 들어온 요청이 어떤 Route의 Predicate 조건을 만족하는지 확인한다.
 2. Web Handler : 매칭된 Route에 정의된 Filter 체인을 가동한다.
