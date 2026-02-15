@@ -4,15 +4,15 @@
 - Gateway는 문지기처럼 들어오는 모든 요청을 검사하고, 적절한 목적지로 안내하며, 필요한 경우 요청의 형태를 가공한다.
 - Spring Cloud Gateway는 이런 역할을 수행하기 위해서 Route(경로), Predicate(조건), Filter(필터)라는 세 가지 핵심 요소를 동작시킨다.
 
-![Gateway 동작 과정](../SCG-and-Reactor/imgs/scg-how-it-works.png)
+![Gateway 동작 과정](./imgs/scg-how-it-works.png)
 
 ### Route
 
-![route-find-request](../SCG-and-Reactor/imgs/route-find-request.png)
+![route-find-request](./imgs/route-find-request.png)
 
 - Gateway 관점에서 Route는 하나의 작업단위이다.
 
-![route-detail](../SCG-and-Reactor/imgs/route-detail.png)
+![route-detail](./imgs/route-detail.png)
 
 - 특정 요청이 어디로 가야 하는지(URI)
 - 어떤 조건을 만족해야 하는지(Predicates)
@@ -30,7 +30,7 @@ Java 8의 Predicate 함수형 인터페이스를 기반으로 한다.
 
 HTTP 요청의 모든 요소(헤더, 파라미터, 경로, 메서드 등)를 검사할 수 있다.
 
-![route-predicate](../SCG-and-Reactor/imgs/route-predicate.png)
+![route-predicate](./imgs/route-predicate.png)
 
 - 예시:
   - 요청 경로가 /api/user 로 시작하는가?
@@ -39,23 +39,23 @@ HTTP 요청의 모든 요소(헤더, 파라미터, 경로, 메서드 등)를 검
 
 위와 같은 질문들을 던지며 검사한다.
 
-![route-predicate-true](../SCG-and-Reactor/imgs/route-predicate-true.png)
+![route-predicate-true](./imgs/route-predicate-true.png)
 
 - Gateway는 설정된 모든 Predicate가 True를 반환할 때만 해당 Route가 유효하다고 판단한다.
 
-![route-predicate-false](../SCG-and-Reactor/imgs/route-predicate-false.png)
+![route-predicate-false](./imgs/route-predicate-false.png)
 
 - 조건이 하나라도 맞지 않으면 가차 없이 다음 Route를 찾아 떠나거나 요청을 거절한다.
 
 ### Filter
 
-Predicate를 거치고 나서, Filter 영역에 들어온다.
+- Predicate를 거치고 나서, Filter 영역에 들어온다.
 
-Filter는 Predicate를 통과한 요청을 실제 서비스로 보내기 전/후에 정교하게 가공하는 작업실이다.
+- Filter는 Predicate를 통과한 요청을 실제 서비스로 보내기 전/후에 정교하게 가공하는 작업실이다.
 
-Filter는 요청이 실제 서비스(DownStream)로 전달되기 전(Pre-Filter)과 결과가 다시 클라이언트에게 돌아가기 전(Post-Filter)의 두 시점에서 동작한다.
+- Filter는 요청이 실제 서비스(DownStream)로 전달되기 전(Pre-Filter)과 결과가 다시 클라이언트에게 돌아가기 전(Post-Filter)의 두 시점에서 동작한다.
 
-마치 고속도로 톨게이트에서 영수증을 주고받거나 차량을 검사하는 것과 유사하다.
+- 마치 고속도로 톨게이트에서 영수증을 주고받거나 차량을 검사하는 것과 유사하다.
 
 - Pre-Filter : 요청 헤더에 사용자 정보를 추가하거나, 불필요한 파라미터를 제거하는 등의 가공 작업을 수행한다.
 - Post-Filter : 서비스의 응답에 보안 헤더를 추가하거나, 응답 시간을 측정하여 메트릭을 남기는 등의 작업을 처리한다.
